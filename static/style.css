@@ -1,0 +1,123 @@
+/* Global Styles - Light & Professional Theme */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e9edf5; /* Light greyish background */
+    color: #333333;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: auto;
+    background: #f0dbdb;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Titles */
+.course-title, .page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+    color: #2c3e50;
+}
+
+/* Lists */
+.pyq-list, .course-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* List Items */
+.pyq-item, .course-item {
+    background: #d5e2f0;
+    margin: 12px 0;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid #494444;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.pyq-item:hover, .course-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* Links */
+a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Special Links */
+.watch-link {
+    color: #f39c12;
+}
+
+.edit-link {
+    color: #2980b9;
+    margin-left: 8px;
+}
+
+.delete-link {
+    color: #e74c3c;
+    margin-left: 8px;
+}
+
+/* Actions */
+.actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Buttons */
+.btn, .add-pyq, .back-btn, .add-course, .exit-admin, .login-btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #3498db;
+    color: rgb(241, 216, 216);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover, .add-pyq:hover, .back-btn:hover, .add-course:hover, .exit-admin:hover, .login-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Forms */
+.admin-login-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.password-input {
+    padding: 12px;
+    margin-bottom: 15px;
+    width: 280px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+}
+
+.no-pyq, .no-courses {
+    text-align: center;
+    color: #777;
+    margin-top: 20px;
+}

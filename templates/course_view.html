@@ -2,51 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome | Ashish Maurya</title>
+    <title>Available Courses</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="course-view-page">
+<body>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Ashish Maurya welcomes you! 🚀</h1>
-            <p class="hero-subtitle">Explore the available courses and master your skills!</p>
-        </div>
-    </section>
-
-    <div class="container">
-        <h2 class="section-title">Available Courses</h2>
-
-        {% if courses %}
-            <div class="course-grid">
-                {% for course in courses %}
-                    <div class="course-card">
-                        <a class="course-link" href="{{ url_for('course_detail', course_id=course[0]) }}">{{ course[1] }}</a>
-
-                        {% if admin_mode %}
-                            <div class="admin-actions">
-                                <a class="edit-link" href="{{ url_for('admin_edit_course', course_id=course[0]) }}">Edit</a>
-                                <a class="delete-link" href="{{ url_for('admin_delete_course', course_id=course[0]) }}">Delete</a>
-                            </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p class="no-courses">No courses available.</p>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <a href="{{ url_for('course_view') }}">Courses</a>
+        {% if admin_mode %}
+            <a href="{{ url_for('admin_add_course') }}">➕ Add Course</a>
+            <a href="{{ url_for('admin_logout') }}">🚪 Exit Admin</a>
         {% endif %}
+    </div>
 
-        <div class="actions">
-            {% if admin_mode %}
-                <a class="btn add-course" href="{{ url_for('admin_add_course') }}">➕ Add New Course</a><br><br>
-                <a class="btn exit-admin" href="{{ url_for('admin_logout') }}">🚪 Exit Admin Mode</a>
+    <div class="main-content">
+        <div class="container">
+            <h1 class="page-title">Available Courses</h1>
+
+            {% if courses %}
+                <ul class="course-list">
+                    {% for course in courses %}
+                        <li class="course-item">
+                            <a class="course-link" href="{{ url_for('course_detail', course_id=course[0]) }}">{{ course[1] }}</a>
+                            {% if admin_mode %}
+                                <div class="admin-actions">
+                                    <a class="edit-link" href="{{ url_for('admin_edit_course', course_id=course[0]) }}">Edit</a>
+                                    |
+                                    <a class="delete-link" href="{{ url_for('admin_delete_course', course_id=course[0]) }}">Delete</a>
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
             {% else %}
-                <div class="admin-login-card">
-                    <form class="admin-login-form" action="{{ url_for('admin_login') }}" method="post">
-                        <input class="password-input" type="password" name="password" placeholder="Enter Admin Password" required>
-                        <button class="btn login-btn" type="submit">Login as Admin</button>
-                    </form>
-                </div>
+                <p class="no-courses">No courses available.</p>
+            {% endif %}
+
+            {% if not admin_mode %}
+                <form class="admin-login-form" action="{{ url_for('admin_login') }}" method="post">
+                    <input class="password-input" type="password" name="password" placeholder="Admin Password" required>
+                    <button class="btn login-btn" type="submit">Login</button>
+                </form>
             {% endif %}
         </div>
     </div>

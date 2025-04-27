@@ -5,38 +5,43 @@
     <title>{{ course_name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="course-detail-page">
+<body>
 
-    <div class="container">
-        <h1 class="course-title">{{ course_name }}</h1>
-
-        {% if pyqs %}
-            <ul class="pyq-list">
-                {% for pyq in pyqs %}
-                    <li class="pyq-item">
-                        <span class="pyq-name">{{ pyq[1] }}</span>
-                        {% if pyq[2] %}
-                            - <a class="watch-link" href="{{ pyq[2] }}" target="_blank">Watch</a>
-                        {% endif %}
-
-                        {% if admin_mode %}
-                            <span class="admin-actions">
-                                - <a class="edit-link" href="{{ url_for('admin_edit_pyq', pyq_id=pyq[0], course_id=course_id) }}">Edit</a>
-                                - <a class="delete-link" href="{{ url_for('admin_delete_pyq', pyq_id=pyq[0], course_id=course_id) }}">Delete</a>
-                            </span>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="no-pyq">No PYQs available.</p>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <a href="{{ url_for('course_view') }}">Courses</a>
+        {% if admin_mode %}
+            <a href="{{ url_for('admin_add_pyq', course_id=course_id) }}">➕ Add PYQ</a>
+            <a href="{{ url_for('admin_logout') }}">🚪 Exit Admin</a>
         {% endif %}
+    </div>
 
-        <div class="actions">
-            {% if admin_mode %}
-                <a class="btn add-pyq" href="{{ url_for('admin_add_pyq', course_id=course_id) }}">➕ Add New PYQ</a>
+    <div class="main-content">
+        <div class="container">
+            <h1 class="course-title">{{ course_name }}</h1>
+
+            {% if pyqs %}
+                <ul class="pyq-list">
+                    {% for pyq in pyqs %}
+                        <li class="pyq-item">
+                            <div>
+                                {{ pyq[1] }}
+                                {% if pyq[2] %}
+                                    - <a class="watch-link" href="{{ pyq[2] }}" target="_blank">Watch</a>
+                                {% endif %}
+                            </div>
+                            {% if admin_mode %}
+                                <div class="admin-actions">
+                                    <a class="edit-link" href="{{ url_for('admin_edit_pyq', pyq_id=pyq[0], course_id=course_id) }}">Edit</a> |
+                                    <a class="delete-link" href="{{ url_for('admin_delete_pyq', pyq_id=pyq[0], course_id=course_id) }}">Delete</a>
+                                </div>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-pyq">No PYQs available.</p>
             {% endif %}
-            <a class="btn back-btn" href="{{ url_for('course_view') }}">🔙 Back to Courses</a>
         </div>
     </div>
 

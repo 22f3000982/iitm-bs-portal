@@ -25,6 +25,7 @@ def init_db():
             course_id INTEGER NOT NULL,
             name TEXT NOT NULL,
             yt_link TEXT,
+            watch_count INTEGER DEFAULT 0,
             FOREIGN KEY (course_id) REFERENCES courses(id)
         )
     ''')
@@ -120,7 +121,7 @@ def course_detail(course_id):
     c.execute('SELECT name FROM courses WHERE id=?', (course_id,))
     course = c.fetchone()
 
-    c.execute('SELECT id, name, yt_link FROM pyqs WHERE course_id=?', (course_id,))
+    c.execute('SELECT id, name, yt_link, watch_count FROM pyqs WHERE course_id=?', (course_id,))
     pyqs = c.fetchall()
 
     conn.close()
@@ -187,6 +188,22 @@ def admin_delete_pyq(pyq_id, course_id):
     conn.close()
 
     return redirect(url_for('course_detail', course_id=course_id))
+
+# ✅ New - Increment Watch Count
+@app.route('/increment_watch/<int:pyq_id>')
+def increment_watch(pyq_id):
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute('UPDATE pyqs SET watch_count = watch_count + 1 WHERE id = ?', (pyq_id,))
+    conn.commit()
+    c.execute('SELECT yt_link FROM pyqs WHERE id = ?', (pyq_id,))
+    link = c.fetchone()
+    conn.close()
+
+    if link:
+        return redirect(link[0])
+    else:
+        return "Link not found"
 
 if __name__ == '__main__':
     if not os.path.exists('database.db'):

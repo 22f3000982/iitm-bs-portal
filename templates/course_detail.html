@@ -27,7 +27,10 @@
                             <div>
                                 {{ pyq[1] }}
                                 {% if pyq[2] %}
-                                    - <a class="watch-link" href="{{ pyq[2] }}" target="_blank">Watch</a>
+                                    - <a class="watch-link" href="{{ url_for('increment_watch', pyq_id=pyq[0]) }}" target="_blank">Watch</a>
+                                {% endif %}
+                                {% if admin_mode %}
+                                    <span style="margin-left: 10px; color: gray;">👀 {{ pyq[3] }}</span>
                                 {% endif %}
                             </div>
                             {% if admin_mode %}

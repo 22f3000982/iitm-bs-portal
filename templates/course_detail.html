@@ -4,49 +4,138 @@
     <meta charset="UTF-8">
     <title>{{ course_name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .watch-link {
+            color: #3498db;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .watch-link:hover {
+            transform: scale(1.1);
+            color: #2980b9;
+        }
+        .eye-icon {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>Dashboard</h2>
-        <a href="{{ url_for('course_view') }}">Courses</a>
-        {% if admin_mode %}
-            <a href="{{ url_for('admin_add_pyq', course_id=course_id) }}">➕ Add PYQ</a>
-            <a href="{{ url_for('admin_logout') }}">🚪 Exit Admin</a>
-        {% endif %}
-    </div>
+<div class="sidebar">
+    <h2>Dashboard</h2>
+    <a href="{{ url_for('course_view') }}">Courses</a>
+    {% if admin_mode %}
+        <a href="{{ url_for('admin_add_item', item_type='pyqs', course_id=course_id) }}">➕ Add PYQ</a>
+        <a href="{{ url_for('admin_add_item', item_type='notes', course_id=course_id) }}">➕ Add Note</a>
+        <a href="{{ url_for('admin_add_item', item_type='assignments', course_id=course_id) }}">➕ Add Assignment</a>
+        <a href="{{ url_for('admin_logout') }}">🚪 Exit Admin</a>
+    {% endif %}
+</div>
 
-    <div class="main-content">
-        <div class="container">
-            <h1 class="course-title">{{ course_name }}</h1>
+<div class="main-content">
+    <div class="container">
+        <h1>{{ course_name }}</h1>
 
-            {% if pyqs %}
-                <ul class="pyq-list">
-                    {% for pyq in pyqs %}
-                        <li class="pyq-item">
-                            <div>
+        <div class="boxes">
+            
+            <!-- PYQs -->
+            <div class="box">
+                <h2>PYQs</h2>
+                {% if pyqs %}
+                    <ul class="item-list">
+                        {% for pyq in pyqs %}
+                            <li>
                                 {{ pyq[1] }}
                                 {% if pyq[2] %}
-                                    - <a class="watch-link" href="{{ url_for('increment_watch', pyq_id=pyq[0]) }}" target="_blank">Watch</a>
+                                    - <a href="{{ url_for('increment_watch', pyq_id=pyq[0]) }}" target="_blank" class="watch-link">
+                                        {% if admin_mode %}
+                                            <span class="eye-icon">👁️</span> ({{ pyq[3] }})
+                                        {% else %}
+                                            Watch
+                                        {% endif %}
+                                      </a>
                                 {% endif %}
                                 {% if admin_mode %}
-                                    <span style="margin-left: 10px; color: gray;">👀 {{ pyq[3] }}</span>
+                                    <div class="admin-links">
+                                        <a href="{{ url_for('admin_edit_item', item_type='pyqs', item_id=pyq[0], course_id=course_id) }}">Edit</a> |
+                                        <a href="{{ url_for('admin_delete_item', item_type='pyqs', course_id=course_id, item_id=pyq[0]) }}">Delete</a>
+                                    </div>
                                 {% endif %}
-                            </div>
-                            {% if admin_mode %}
-                                <div class="admin-actions">
-                                    <a class="edit-link" href="{{ url_for('admin_edit_pyq', pyq_id=pyq[0], course_id=course_id) }}">Edit</a> |
-                                    <a class="delete-link" href="{{ url_for('admin_delete_pyq', pyq_id=pyq[0], course_id=course_id) }}">Delete</a>
-                                </div>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p class="no-pyq">No PYQs available.</p>
-            {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No PYQs available.</p>
+                {% endif %}
+            </div>
+
+            <!-- Notes -->
+            <div class="box">
+                <h2>Notes</h2>
+                {% if notes %}
+                    <ul class="item-list">
+                        {% for note in notes %}
+                            <li>
+                                {{ note[1] }}
+                                {% if note[2] %}
+                                    - <a href="{{ url_for('increment_watch_note', note_id=note[0]) }}" target="_blank" class="watch-link">
+                                        {% if admin_mode %}
+                                            <span class="eye-icon">👁️</span> ({{ note[3]|default(0) }})
+                                        {% else %}
+                                            Watch
+                                        {% endif %}
+                                      </a>
+                                {% endif %}
+                                {% if admin_mode %}
+                                    <div class="admin-links">
+                                        <a href="{{ url_for('admin_edit_item', item_type='notes', item_id=note[0], course_id=course_id) }}">Edit</a> |
+                                        <a href="{{ url_for('admin_delete_item', item_type='notes', course_id=course_id, item_id=note[0]) }}">Delete</a>
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No Notes available.</p>
+                {% endif %}
+            </div>
+
+            <!-- Assignments -->
+            <div class="box">
+                <h2>Assignments</h2>
+                {% if assignments %}
+                    <ul class="item-list">
+                        {% for assignment in assignments %}
+                            <li>
+                                {{ assignment[1] }}
+                                {% if assignment[2] %}
+                                    - <a href="{{ url_for('increment_watch_assignment', assignment_id=assignment[0]) }}" target="_blank" class="watch-link">
+                                        {% if admin_mode %}
+                                            <span class="eye-icon">👁️</span> ({{ assignment[3]|default(0) }})
+                                        {% else %}
+                                            Watch
+                                        {% endif %}
+                                      </a>
+                                {% endif %}
+                                {% if admin_mode %}
+                                    <div class="admin-links">
+                                        <a href="{{ url_for('admin_edit_item', item_type='assignments', item_id=assignment[0], course_id=course_id) }}">Edit</a> |
+                                        <a href="{{ url_for('admin_delete_item', item_type='assignments', course_id=course_id, item_id=assignment[0]) }}">Delete</a>
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No Assignments available.</p>
+                {% endif %}
+            </div>
+
         </div>
     </div>
+</div>
 
 </body>
 </html>

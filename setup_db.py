@@ -3,26 +3,25 @@ import sqlite3
 conn = sqlite3.connect('database.db')
 c = conn.cursor()
 
-# Create courses table
-c.execute('''
-    CREATE TABLE IF NOT EXISTS courses (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL
-    )
-''')
+# PYQs table में watch_count add करो
+try:
+    c.execute('ALTER TABLE pyqs ADD COLUMN watch_count INTEGER DEFAULT 0')
+except:
+    print('pyqs में watch_count पहले से है या कुछ और issue है')
 
-# Create pyqs table
-c.execute('''
-    CREATE TABLE IF NOT EXISTS pyqs (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        course_id INTEGER,
-        pyq_name TEXT NOT NULL,
-        yt_link TEXT NOT NULL,
-        FOREIGN KEY (course_id) REFERENCES courses(id)
-    )
-''')
+# Notes table में watch_count add करो
+try:
+    c.execute('ALTER TABLE notes ADD COLUMN watch_count INTEGER DEFAULT 0')
+except:
+    print('notes में watch_count पहले से है या कुछ और issue है')
+
+# Assignments table में watch_count add करो
+try:
+    c.execute('ALTER TABLE assignments ADD COLUMN watch_count INTEGER DEFAULT 0')
+except:
+    print('assignments में watch_count पहले से है या कुछ और issue है')
 
 conn.commit()
 conn.close()
 
-print("Database setup complete! ✅")
+print("Done ✅")

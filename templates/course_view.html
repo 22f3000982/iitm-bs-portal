@@ -2,26 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Available Courses</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+    <!-- Sidebar -->
     <div class="sidebar">
         <h2>Dashboard</h2>
-        <a href="{{ url_for('course_view') }}">Courses</a>
-        {% if admin_mode %}
+        <a href="{{ url_for('course_view') }}">📚 Courses</a>
+        <a href="#">📞 Contact Us</a>
+        <a href="#">ℹ️ About Admin</a>
+        <a href="#">⚙️ Settings</a>
+
+        {% if not admin_mode %}
+            <!-- Admin Login Form in Sidebar -->
+            <form class="admin-login-form" action="{{ url_for('admin_login') }}" method="post">
+                <input class="password-input" type="password" name="password" placeholder="Admin Password" required>
+                <button class="btn login-btn" type="submit">Login</button>
+            </form>
+        {% else %}
             <a href="{{ url_for('admin_add_course') }}">➕ Add Course</a>
             <a href="{{ url_for('admin_logout') }}">🚪 Exit Admin</a>
         {% endif %}
     </div>
 
+    <!-- Top Navbar -->
+    <div class="navbar">
+        <input type="text" class="search-box" placeholder="Search Courses...">
+        <div class="navbar-buttons">
+            <button class="nav-btn">🔔 Notifications</button>
+            <button class="nav-btn">➕ Add New</button>
+            <button class="nav-btn">👤 Profile</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <div class="main-content">
         <div class="container">
             <h1 class="page-title">Available Courses</h1>
 
+            <input type="text" id="globalSearch" class="global-search" placeholder="Global Search...">
+
             {% if courses %}
-                <ul class="course-list">
+                <ul class="course-list" id="courseList">
                     {% for course in courses %}
                         <li class="course-item">
                             <a class="course-link" href="{{ url_for('course_detail', course_id=course[0]) }}">{{ course[1] }}</a>
@@ -38,15 +62,23 @@
             {% else %}
                 <p class="no-courses">No courses available.</p>
             {% endif %}
-
-            {% if not admin_mode %}
-                <form class="admin-login-form" action="{{ url_for('admin_login') }}" method="post">
-                    <input class="password-input" type="password" name="password" placeholder="Admin Password" required>
-                    <button class="btn login-btn" type="submit">Login</button>
-                </form>
-            {% endif %}
         </div>
     </div>
+
+<script>
+    // Global Search Function
+    const searchInput = document.getElementById('globalSearch');
+    const courseList = document.getElementById('courseList');
+    const courses = courseList.getElementsByClassName('course-item');
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.toLowerCase();
+        for (let course of courses) {
+            const title = course.innerText.toLowerCase();
+            course.style.display = title.includes(query) ? 'flex' : 'none';
+        }
+    });
+</script>
 
 </body>
 </html>

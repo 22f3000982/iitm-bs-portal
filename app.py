@@ -283,7 +283,7 @@ def admin_edit_item(item_type, course_id, item_id):
             'title': item[0],
             'link': item[1]
         }
-        return render_template('admin_edit_item.html', item=item_data, item_type=item_type, course_id=course_id, item_id=item_id)
+        return render_template('admin_edit_pyq.html', item=item_data, item_type=item_type, course_id=course_id, item_id=item_id)
     else:
         return "Item not found"
 

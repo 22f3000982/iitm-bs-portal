@@ -6,22 +6,35 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         body, html {
-        margin: 0;
-        padding: 0;
-    }
-    .main-content {
-        margin-top: 0 !important;
-        padding-top: 10px; /* or lower if needed */
-    }
-    .container {
-        margin-top: 0 !important;
-        padding-top: 10px; /* tweak as needed */
-    }
+            margin: 0;
+            padding: 0;
+        }
+        .main-content {
+            margin-top: 0 !important;
+            padding-top: 10px;
+        }
+        .container {
+            margin-top: 0 !important;
+            padding-top: 10px;
+        }
+        .item-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .item-name {
+            flex-grow: 1;
+            text-align: left;
+        }
         .watch-link {
             color: #3498db;
             font-weight: bold;
             text-decoration: none;
             transition: transform 0.2s, color 0.2s;
+            white-space: nowrap;
+            margin-left: 10px;
         }
         .watch-link:hover {
             transform: scale(1.1);
@@ -31,7 +44,10 @@
             font-size: 1.2em;
             margin-right: 5px;
         }
-        
+        .admin-links {
+            margin-left: 15px;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
@@ -52,7 +68,6 @@
         <h1>{{ course_name }}</h1>
 
         <div class="boxes">
-            
             <!-- PYQs -->
             <div class="box">
                 {% if admin_mode %}
@@ -62,15 +77,15 @@
                     <ul class="item-list">
                         {% for pyq in pyqs %}
                             <li>
-                                {{ pyq[1] }}
+                                <span class="item-name">{{ pyq[1] }}</span>
                                 {% if pyq[2] %}
-                                    - <a href="{{ url_for('increment_watch', pyq_id=pyq[0]) }}" target="_blank" class="watch-link">
+                                    <a href="{{ url_for('increment_watch', pyq_id=pyq[0]) }}" target="_blank" class="watch-link">
                                         {% if admin_mode %}
                                             <span class="eye-icon">👁️</span> ({{ pyq[3] }})
                                         {% else %}
-                                            Watch
+                                        ▶️Watch
                                         {% endif %}
-                                      </a>
+                                    </a>
                                 {% endif %}
                                 {% if admin_mode %}
                                     <div class="admin-links">
@@ -95,15 +110,15 @@
                     <ul class="item-list">
                         {% for note in notes %}
                             <li>
-                                {{ note[1] }}
+                                <span class="item-name">{{ note[1] }}</span>
                                 {% if note[2] %}
-                                    - <a href="{{ url_for('increment_watch_note', note_id=note[0]) }}" target="_blank" class="watch-link">
+                                    <a href="{{ url_for('increment_watch_note', note_id=note[0]) }}" target="_blank" class="watch-link">
                                         {% if admin_mode %}
                                             <span class="eye-icon">👁️</span> ({{ note[3]|default(0) }})
                                         {% else %}
-                                            Watch
+                                        ▶️Watch
                                         {% endif %}
-                                      </a>
+                                    </a>
                                 {% endif %}
                                 {% if admin_mode %}
                                     <div class="admin-links">
@@ -128,15 +143,15 @@
                     <ul class="item-list">
                         {% for assignment in assignments %}
                             <li>
-                                {{ assignment[1] }}
+                                <span class="item-name">{{ assignment[1] }}</span>
                                 {% if assignment[2] %}
-                                    - <a href="{{ url_for('increment_watch_assignment', assignment_id=assignment[0]) }}" target="_blank" class="watch-link">
+                                    <a href="{{ url_for('increment_watch_assignment', assignment_id=assignment[0]) }}" target="_blank" class="watch-link">
                                         {% if admin_mode %}
                                             <span class="eye-icon">👁️</span> ({{ assignment[3]|default(0) }})
                                         {% else %}
-                                            Watch
+                                        ▶️Watch
                                         {% endif %}
-                                      </a>
+                                    </a>
                                 {% endif %}
                                 {% if admin_mode %}
                                     <div class="admin-links">

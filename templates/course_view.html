@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   
+    
 </head>
 <body>
 
@@ -29,7 +31,8 @@
 
     <!-- Top Navbar -->
     <div class="navbar">
-        <input type="text" class="search-box" placeholder="Search Courses...">
+        <!-- <input type="text" class="search-box" placeholder="Search Courses..."> -->
+        <input type="text" id="globalSearch" class="global-search" placeholder="Search Course...">
         <div class="navbar-buttons">
             <button class="nav-btn">🔔 Notifications</button>
             <button class="nav-btn">➕ Add New</button>
@@ -42,23 +45,24 @@
         <div class="container">
             <h1 class="page-title">Available Courses</h1>
 
-            <input type="text" id="globalSearch" class="global-search" placeholder="Global Search...">
+            <!-- <input type="text" id="globalSearch" class="global-search" placeholder="Global Search..."> -->
 
             {% if courses %}
-                <ul class="course-list" id="courseList">
-                    {% for course in courses %}
-                        <li class="course-item">
-                            <a class="course-link" href="{{ url_for('course_detail', course_id=course[0]) }}">{{ course[1] }}</a>
-                            {% if admin_mode %}
-                                <div class="admin-actions">
-                                    <a class="edit-link" href="{{ url_for('admin_edit_course', course_id=course[0]) }}">Edit</a>
-                                    |
-                                    <a class="delete-link" href="{{ url_for('admin_delete_course', course_id=course[0]) }}">Delete</a>
-                                </div>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
+            <div class="course-grid" id="courseList">
+                {% for course in courses %}
+                    <div class="course-card">
+                        <a class="course-link" href="{{ url_for('course_detail', course_id=course[0]) }}">{{ course[1] }}</a>
+                        {% if admin_mode %}
+                            <div class="admin-actions">
+                                <a class="edit-link" href="{{ url_for('admin_edit_course', course_id=course[0]) }}">Edit</a>
+                                |
+                                <a class="delete-link" href="{{ url_for('admin_delete_course', course_id=course[0]) }}">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            
             {% else %}
                 <p class="no-courses">No courses available.</p>
             {% endif %}

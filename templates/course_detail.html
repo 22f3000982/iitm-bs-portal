@@ -3,37 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ course_name }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style8.css') }}">
     <style>
         body, html {
             margin: 0;
             padding: 0;
             background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-            height: 100%; /* Ensure full height for scrolling */
-overflow-y: auto; /* Allow scrolling on the body */
+            height: 100%;
+            overflow-y: auto;
         }
         .main-content {
-            margin-left: 220px; /* Adjusted for sidebar width */
-            min-height: 100vh; /* Ensure it takes at least full viewport height */
-            margin-top: 0 !important;
+            margin-left: 220px;
+            min-height: 100vh;
             overflow-y: auto;
             background: linear-gradient(to bottom, #15113a, #302b63, #24243e);
+            
         }
         .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100%;
-    z-index: 3;
-}
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100%;
+            z-index: 3;
+            background: #0f0c29;
+            padding: 20px;
+            color: #dae1eb;
+        }
+        .sidebar h2 {
+            margin: 0 0 20px;
+            font-size: 1.5em;
+        }
+        .sidebar a {
+            display: block;
+            color: #3498db;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 1em;
+        }
+        .sidebar a:hover {
+            color: #2980b9;
+        }
         .container {
-            margin-top: 0 !important;
-            padding-top: 40px; /* Increased to 40px for more space at the top */
-            padding-top: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .container h1 {
+            color: #dae1eb;
+            margin: 0 0 20px;
+            font-size: 2em;
+        }
+        #searchInput {
+            width: 50%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            font-size: 1em;
+            border: 1px solid #888;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        #searchInput:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+            outline: none;
+        }
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card {
             background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-            border: none;
-            box-shadow: 0 4px 8px rgba(245, 246, 246, 0.604);
+            color: #c0dbed;
+            width: 30%;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(245, 246, 246, 0.204);
+        }
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+        }
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
         .item-list li {
             display: flex;
@@ -45,6 +101,7 @@ overflow-y: auto; /* Allow scrolling on the body */
         .item-name {
             flex-grow: 1;
             text-align: left;
+            font-size: 1.1em;
         }
         .watch-link {
             color: #3498db;
@@ -53,47 +110,36 @@ overflow-y: auto; /* Allow scrolling on the body */
             transition: transform 0.2s, color 0.2s;
             white-space: nowrap;
             margin-left: 10px;
+            font-size: 1.0em;
         }
         .watch-link:hover {
             transform: scale(1.1);
             color: #2980b9;
         }
         .eye-icon {
-            font-size: 1.2em;
+            font-size: 1em;
             margin-right: 5px;
         }
         .admin-links {
-            margin-left: 15px;
+            margin-left: 10px;
+            font-size: 1.1em;
+        }
+        .admin-links a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .admin-links a:hover {
+            color: #2980b9;
+        }
+        .no-items {
+            font-style: italic;
+            color: #c0dbed;
             font-size: 0.9em;
         }
-        #searchInput {
-    width: 40%;
-    padding: 10px;
-    margin: 10px 0 20px;
-    font-size: 1em;
-    border: 1px solid #888;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-#searchInput:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
-    outline: none;
-}
-.box {
-    color: #c0dbed;
-    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-    box-shadow: 0 4px 8px rgba(245, 246, 246, 0.204);
-    
-}
-
-
     </style>
 </head>
 <body>
-
 <div class="sidebar">
     <h2>Dashboard</h2>
     <a href="{{ url_for('course_view') }}">Courses</a>
@@ -107,14 +153,12 @@ overflow-y: auto; /* Allow scrolling on the body */
 
 <div class="main-content">
     <div class="container">
-        <h1 style="color: #dae1eb;" >{{ course_name }}</h1>
-
-        <!-- Search Bar -->
+        <h1>{{ course_name }}</h1>
         <input type="text" id="searchInput" placeholder="Search items...">
 
-        <div class="boxes">
-            <!-- PYQs -->
-            <div class="box">
+        <div class="cards">
+            <!-- PYQs Card -->
+            <div class="card">
                 {% if admin_mode %}
                     <h2>PYQs</h2>
                 {% endif %}
@@ -128,7 +172,7 @@ overflow-y: auto; /* Allow scrolling on the body */
                                         {% if admin_mode %}
                                             <span class="eye-icon">👁️</span> ({{ pyq[3] }})
                                         {% else %}
-                                        ▶️Watch
+                                            ▶️ Watch
                                         {% endif %}
                                     </a>
                                 {% endif %}
@@ -142,12 +186,12 @@ overflow-y: auto; /* Allow scrolling on the body */
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p>===comming soon===</p>
+                    <p class="no-items">=== Coming Soon ===</p>
                 {% endif %}
             </div>
 
-            <!-- Notes -->
-            <div class="box">
+            <!-- Notes Card -->
+            <div class="card">
                 {% if admin_mode %}
                     <h2>Notes</h2>
                 {% endif %}
@@ -161,7 +205,7 @@ overflow-y: auto; /* Allow scrolling on the body */
                                         {% if admin_mode %}
                                             <span class="eye-icon">👁️</span> ({{ note[3]|default(0) }})
                                         {% else %}
-                                        ▶️Watch
+                                            ▶️ Watch
                                         {% endif %}
                                     </a>
                                 {% endif %}
@@ -175,12 +219,12 @@ overflow-y: auto; /* Allow scrolling on the body */
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p>===comming soon===</p>
+                    <p class="no-items">=== Coming Soon ===</p>
                 {% endif %}
             </div>
 
-            <!-- Assignments -->
-            <div class="box">
+            <!-- Assignments Card -->
+            <div class="card">
                 {% if admin_mode %}
                     <h2>Assignments</h2>
                 {% endif %}
@@ -194,7 +238,7 @@ overflow-y: auto; /* Allow scrolling on the body */
                                         {% if admin_mode %}
                                             <span class="eye-icon">👁️</span> ({{ assignment[3]|default(0) }})
                                         {% else %}
-                                        ▶️Watch
+                                            ▶️ Watch
                                         {% endif %}
                                     </a>
                                 {% endif %}
@@ -208,15 +252,13 @@ overflow-y: auto; /* Allow scrolling on the body */
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p>===comming soon===</p>
+                    <p class="no-items">=== Coming Soon ===</p>
                 {% endif %}
             </div>
-
         </div>
     </div>
 </div>
 
-<!-- JavaScript for Search Filtering -->
 <script>
     document.getElementById('searchInput').addEventListener('input', function () {
         const searchTerm = this.value.toLowerCase();

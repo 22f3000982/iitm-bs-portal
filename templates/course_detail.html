@@ -9,19 +9,31 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            height: 100%; /* Ensure full height for scrolling */
+overflow-y: auto; /* Allow scrolling on the body */
         }
         .main-content {
+            margin-left: 220px; /* Adjusted for sidebar width */
+            min-height: 100vh; /* Ensure it takes at least full viewport height */
             margin-top: 0 !important;
+            overflow-y: auto;
             background: linear-gradient(to bottom, #15113a, #302b63, #24243e);
-            box-shadow: 0 4px 8px rgba(245, 246, 246, 0.904);
         }
+        .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    z-index: 3;
+}
         .container {
             margin-top: 0 !important;
             padding-top: 40px; /* Increased to 40px for more space at the top */
             padding-top: 10px;
             background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
             border: none;
-            box-shadow: 0 4px 8px rgba(245, 246, 246, 0.904);
+            box-shadow: 0 4px 8px rgba(245, 246, 246, 0.604);
         }
         .item-list li {
             display: flex;
@@ -71,8 +83,10 @@
     outline: none;
 }
 .box {
-    background-color: #fae7e7; /* Changed from white (#ffffff) to a soft gray */
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgb(176, 234, 243) 0%, rgb(171, 197, 232) 51.2%, rgba(117,144,179,1) 100.1% );
+    color: #c0dbed;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    box-shadow: 0 4px 8px rgba(245, 246, 246, 0.204);
+    
 }
 
 
@@ -93,7 +107,7 @@
 
 <div class="main-content">
     <div class="container">
-        <h1 style="color: #f9f9f9;" >{{ course_name }}</h1>
+        <h1 style="color: #dae1eb;" >{{ course_name }}</h1>
 
         <!-- Search Bar -->
         <input type="text" id="searchInput" placeholder="Search items...">

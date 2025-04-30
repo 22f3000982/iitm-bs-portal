@@ -57,8 +57,17 @@ def init_db():
     conn.commit()
     conn.close()
 
+
+# Landing page route
+@app.route('/')
+def landing_page():
+    return render_template('landing.html')
+
+
+
+
 # Home - Show all courses
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/dashboard', methods=['GET', 'POST'])
 def course_view():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()

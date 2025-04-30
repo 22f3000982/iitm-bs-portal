@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome | PYQ Platform</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box !important;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(180deg, #0a0a2a 0%, #1a1440 50%, #1f2a60 100%);
+      color: #f2f2f2;
+      line-height: 1.6;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+    }
+
+    .Header {
+      padding: 3rem 1rem 2rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    .Header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .Header p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .Button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      background-color: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 16px rgba(30, 144, 255, 0.5);
+      z-index: 2;
+      position: relative;
+    }
+
+    .Button:hover {
+      background-color: #0073e6;
+      transform: scale(1.05);
+    }
+
+    .Container {
+      margin: 3rem auto;
+      padding: 2rem;
+      max-width: 700px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 2;
+      position: relative;
+    }
+
+    .Container h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Background animated shooting star lines */
+    .lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      margin: auto;
+      width: 90vw;
+      display: flex;
+      justify-content: space-between;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .line {
+      position: relative;
+      width: 1px;
+      height: 100%;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .line::after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 15vh;
+      width: 100%;
+      top: -50%;
+      left: 0;
+      animation: drop 7s infinite;
+      animation-fill-mode: forwards;
+      animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+      filter: blur(2px);
+    }
+
+    /* Each line with its own color and delay */
+    .line:nth-child(1)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #FF4500); animation-delay: 0.5s; }
+    .line:nth-child(2)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #32CD32); animation-delay: 1s; }
+    .line:nth-child(3)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #1E90FF); animation-delay: 1.5s; }
+    .line:nth-child(4)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #FFD700); animation-delay: 2s; }
+    .line:nth-child(5)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #8A2BE2); animation-delay: 2.5s; }
+    .line:nth-child(6)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #20B2AA); animation-delay: 3s; }
+    .line:nth-child(7)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #DC143C); animation-delay: 3.5s; }
+    .line:nth-child(8)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #00FA9A); animation-delay: 4s; }
+    .line:nth-child(9)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #FF1493); animation-delay: 4.5s; }
+    .line:nth-child(10)::after { background: linear-gradient(to bottom, rgba(255,255,255,0), #00BFFF); animation-delay: 5s; }
+
+    @keyframes drop {
+      0% { top: -50%; }
+      100% { top: 110%; }
+    }
+
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: table;
+  width: 100%;
+  height: 100%;
+  background-color: #111;  /* Background color */
+  color: #f2f2f2;  /* Text color */
+  line-height: 1.6;
+  position: relative;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  margin: auto;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between; /* Distribute lines evenly */
+}
+
+.line {
+  position: relative;
+  width: 1px;
+  height: 100%;
+  /*background: #ffffff;  /* Line color */
+  overflow: hidden;
+}
+
+.line::after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 15vh;
+  width: 100%;
+  top: -50%;
+  left: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+  animation: drop 7s 0s infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+}
+
+/* Different colors for each line's pseudo-element */
+.line:nth-child(1)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #FF4500 75%, #FF4500 100%);
+  animation-delay: 0.5s;
+}
+
+.line:nth-child(2)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #32CD32 75%, #32CD32 100%);
+  animation-delay: 1s;
+}
+
+.line:nth-child(3)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #1E90FF 75%, #1E90FF 100%);
+  animation-delay: 1.5s;
+}
+
+.line:nth-child(4)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #FFD700 75%, #FFD700 100%);
+  animation-delay: 2s;
+}
+
+.line:nth-child(5)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #8A2BE2 75%, #8A2BE2 100%);
+  animation-delay: 2.5s;
+}
+
+.line:nth-child(6)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #20B2AA 75%, #20B2AA 100%);
+  animation-delay: 3s;
+}
+
+.line:nth-child(7)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #DC143C 75%, #DC143C 100%);
+  animation-delay: 3.5s;
+}
+
+.line:nth-child(8)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #00FA9A 75%, #00FA9A 100%);
+  animation-delay: 4s;
+}
+
+.line:nth-child(9)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #FF1493 75%, #FF1493 100%);
+  animation-delay: 4.5s;
+}
+
+.line:nth-child(10)::after {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #00BFFF 75%, #00BFFF 100%);
+  animation-delay: 5s;
+}
+
+@keyframes drop {
+  0% {
+    top: -50%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+
+
+
+
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+  <!-- Particle Lines -->
+  <div class="lines">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  
+
+
+
+  
+  <div class="Header">
+    <h1>Welcome to the PYQ Platform</h1>
+
+    <p>Explore previous year questions organized by course and stay prepared!</p>
+    <p>Our platform is designed to help you find and study previous year questions efficiently.</p>
+    <a href="{{ url_for('course_view') }}" class="Button">Let's Get Started</a>
+  </div>
+
+  <div class="Container">
+    <h2>Why Choose Us?</h2>
+    <p>Our platform provides a comprehensive collection of previous year questions, making it easier for you to prepare for your exams.</p>
+
+    <p>Join us and enhance your learning experience!</p>
+    <p>For any queries, feel free to reach out to us.</p>
+    <p>Happy studying!</p>
+    
+  </div>
+</body>
+</html>

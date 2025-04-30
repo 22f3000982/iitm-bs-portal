@@ -8,14 +8,20 @@
         body, html {
             margin: 0;
             padding: 0;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
         }
         .main-content {
             margin-top: 0 !important;
-            padding-top: 10px;
+            background: linear-gradient(to bottom, #15113a, #302b63, #24243e);
+            box-shadow: 0 4px 8px rgba(245, 246, 246, 0.904);
         }
         .container {
             margin-top: 0 !important;
+            padding-top: 40px; /* Increased to 40px for more space at the top */
             padding-top: 10px;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+            border: none;
+            box-shadow: 0 4px 8px rgba(245, 246, 246, 0.904);
         }
         .item-list li {
             display: flex;
@@ -64,6 +70,11 @@
     box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
     outline: none;
 }
+.box {
+    background-color: #fae7e7; /* Changed from white (#ffffff) to a soft gray */
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgb(176, 234, 243) 0%, rgb(171, 197, 232) 51.2%, rgba(117,144,179,1) 100.1% );
+}
+
 
     </style>
 </head>
@@ -82,7 +93,7 @@
 
 <div class="main-content">
     <div class="container">
-        <h1>{{ course_name }}</h1>
+        <h1 style="color: #f9f9f9;" >{{ course_name }}</h1>
 
         <!-- Search Bar -->
         <input type="text" id="searchInput" placeholder="Search items...">

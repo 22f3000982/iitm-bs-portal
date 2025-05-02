@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import sqlite3
 import os
+import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -57,14 +58,36 @@ def init_db():
     conn.commit()
     conn.close()
 
+# Backup the SQLite database to backup.sql using Python's sqlite3 module
+def backup_db():
+    try:
+        conn = sqlite3.connect('database.db')
+        with open('backup.sql', 'w') as f:
+            for line in conn.iterdump():
+                f.write(f'{line}\n')
+        conn.close()
+        print("Database backed up to backup.sql")
+    except Exception as e:
+        print(f"Error backing up database: {e}")
+
+# Restore the SQLite database from backup.sql
+def restore_db():
+    if os.path.exists('backup.sql'):
+        try:
+            conn = sqlite3.connect('database.db')
+            with open('backup.sql', 'r') as f:
+                sql = f.read()
+                conn.executescript(sql)
+            conn.commit()
+            conn.close()
+            print("Database restored from backup.sql")
+        except Exception as e:
+            print(f"Error restoring database: {e}")
 
 # Landing page route
 @app.route('/')
 def landing_page():
     return render_template('landing.html')
-
-
-
 
 # Home - Show all courses
 @app.route('/dashboard', methods=['GET', 'POST'])
@@ -105,6 +128,7 @@ def admin_add_course():
         c.execute('INSERT INTO courses (name) VALUES (?)', (course_name,))
         conn.commit()
         conn.close()
+        backup_db()  # Backup database after adding course
         return redirect(url_for('course_view'))
 
     return render_template('admin_add_course.html')
@@ -123,6 +147,7 @@ def admin_edit_course(course_id):
         c.execute('UPDATE courses SET name = ? WHERE id = ?', (new_name, course_id))
         conn.commit()
         conn.close()
+        backup_db()  # Backup database after editing course
         return redirect(url_for('course_view'))
 
     c.execute('SELECT name FROM courses WHERE id = ?', (course_id,))
@@ -145,6 +170,7 @@ def admin_delete_course(course_id):
     c.execute('DELETE FROM assignments WHERE course_id = ?', (course_id,))
     conn.commit()
     conn.close()
+    backup_db()  # Backup database after deleting course
     return redirect(url_for('course_view'))
 
 # View course detail
@@ -200,11 +226,12 @@ def admin_add_item(item_type, course_id):
 
         conn.commit()
         conn.close()
+        backup_db()  # Backup database after adding item
         return redirect(url_for('course_detail', course_id=course_id))
 
     return render_template('admin_add_pyq.html', course_id=course_id, item_type=item_type)
 
-# ✅ Watch Count Increment (PYQs)
+# Watch Count Increment (PYQs)
 @app.route('/increment_watch/<int:pyq_id>')
 def increment_watch(pyq_id):
     conn = sqlite3.connect('database.db')
@@ -220,7 +247,7 @@ def increment_watch(pyq_id):
     else:
         return "Link not found"
 
-# ✅ Watch Count Increment (Notes)
+# Watch Count Increment (Notes)
 @app.route('/increment_watch_note/<int:note_id>')
 def increment_watch_note(note_id):
     conn = sqlite3.connect('database.db')
@@ -236,7 +263,7 @@ def increment_watch_note(note_id):
     else:
         return "Link not found"
 
-# ✅ Watch Count Increment (Assignments)
+# Watch Count Increment (Assignments)
 @app.route('/increment_watch_assignment/<int:assignment_id>')
 def increment_watch_assignment(assignment_id):
     conn = sqlite3.connect('database.db')
@@ -274,6 +301,7 @@ def admin_edit_item(item_type, course_id, item_id):
 
         conn.commit()
         conn.close()
+        backup_db()  # Backup database after editing item
         return redirect(url_for('course_detail', course_id=course_id))
 
     # Fetch existing item
@@ -317,6 +345,7 @@ def admin_delete_item(item_type, course_id, item_id):
 
     conn.commit()
     conn.close()
+    backup_db()  # Backup database after deleting item
     flash('Item deleted successfully!', 'success')
     return redirect(url_for('course_detail', course_id=course_id))
 
@@ -324,7 +353,9 @@ def admin_delete_item(item_type, course_id, item_id):
 if __name__ == '__main__':
     if not os.path.exists('database.db'):
         init_db()
+        restore_db()  # Restore database from backup.sql if it exists
     else:
         init_db()
+        restore_db()  # Restore database from backup.sql if it exists
 
     app.run(debug=True)

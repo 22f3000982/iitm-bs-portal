@@ -39,7 +39,7 @@ INSERT INTO "courses" VALUES(3,'MLF');
 INSERT INTO "courses" VALUES(4,'MLT');
 INSERT INTO "courses" VALUES(5,'PDSA');
 INSERT INTO "courses" VALUES(9,'DBMS');
-INSERT INTO "courses" VALUES(12,'meow meow');
+INSERT INTO "courses" VALUES(12,'meow meow f');
 CREATE TABLE notes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             course_id INTEGER NOT NULL,

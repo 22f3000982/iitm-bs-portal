@@ -29,7 +29,6 @@ INSERT INTO "assignments" VALUES(20,9,'DBMS Week-10 One Shot Revision Part-2','h
 INSERT INTO "assignments" VALUES(21,9,'DBMS Week-11 One Shot Revision ','https://youtu.be/oU8bDX5E0UQ',0);
 INSERT INTO "assignments" VALUES(22,9,'DBMS Week-12 One Shot Revision Part-1','https://youtu.be/QHiqNebNP7s',0);
 INSERT INTO "assignments" VALUES(23,9,'DBMS Week-12 One Shot Revision Part-2','https://youtu.be/Cy9LuqeBE1Y',0);
-INSERT INTO "assignments" VALUES(24,12,'meow -3','https://youtu.be/VT9ToOPawW0',0);
 CREATE TABLE courses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL
@@ -37,9 +36,8 @@ CREATE TABLE courses (
 INSERT INTO "courses" VALUES(1,'Business Analytics ');
 INSERT INTO "courses" VALUES(3,'MLF');
 INSERT INTO "courses" VALUES(4,'MLT');
-INSERT INTO "courses" VALUES(5,'PDSA');
-INSERT INTO "courses" VALUES(9,'DBMS');
-INSERT INTO "courses" VALUES(12,'meow meow f');
+INSERT INTO "courses" VALUES(5,'PDSA(Theory+OPPE)');
+INSERT INTO "courses" VALUES(9,'DBMS (Theory+OPPE)');
 CREATE TABLE notes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             course_id INTEGER NOT NULL,
@@ -69,7 +67,6 @@ INSERT INTO "notes" VALUES(20,9,'DBMS Week-5 One Shot Revision','https://youtu.b
 INSERT INTO "notes" VALUES(21,9,'DBMS Week-6 One Shot Revision','https://youtu.be/AG8w_J9vaTQ',0);
 INSERT INTO "notes" VALUES(22,9,'DBMS Week-8 One Shot Revision Part-1','https://youtu.be/AG8w_J9vaTQ',0);
 INSERT INTO "notes" VALUES(23,9,'DBMS Week-8 One Shot Revision Part-2','https://youtu.be/-MiPacTEjTE',0);
-INSERT INTO "notes" VALUES(24,12,'meow -2','https://youtu.be/VT9ToOPawW0',0);
 CREATE TABLE pyqs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             course_id INTEGER NOT NULL,
@@ -103,10 +100,10 @@ INSERT INTO "pyqs" VALUES(27,5,'PDSA Week-3 PYQ','https://youtu.be/4iNU_E2_y9k',
 INSERT INTO "pyqs" VALUES(28,5,'PDSA Week-4 PYQ','https://youtu.be/V2RZ8PY37Ts',0);
 INSERT INTO "pyqs" VALUES(29,5,'PDSA Quiz-1 PYQ | Jan 24','https://youtu.be/FNfmEJqK8bU',0);
 INSERT INTO "pyqs" VALUES(30,5,'PDSA Quiz-1 PYQ | May 24','https://youtu.be/MGchbfQqXt4',0);
-INSERT INTO "pyqs" VALUES(31,12,'meow','https://youtu.be/VT9ToOPawW0',0);
+INSERT INTO "pyqs" VALUES(32,9,'DBMS OPPE PYQ PlayList','https://www.youtube.com/playlist?list=PLTewhG5vbW7EKmyl32LAzSJLcEtuK1fer',0);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('courses',12);
-INSERT INTO "sqlite_sequence" VALUES('pyqs',31);
+INSERT INTO "sqlite_sequence" VALUES('pyqs',32);
 INSERT INTO "sqlite_sequence" VALUES('notes',24);
 INSERT INTO "sqlite_sequence" VALUES('assignments',24);
 COMMIT;

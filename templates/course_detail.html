@@ -17,7 +17,6 @@
             min-height: 100vh;
             overflow-y: auto;
             background: linear-gradient(to bottom, #15113a, #302b63, #24243e);
-            
         }
         .sidebar {
             position: fixed;
@@ -176,6 +175,8 @@
                                             ▶️ Watch
                                         {% endif %}
                                     </a>
+                                {% else %}
+                                    <span class="no-items">Coming Soon</span>
                                 {% endif %}
                                 {% if admin_mode %}
                                     <div class="admin-links">
@@ -209,6 +210,8 @@
                                             ▶️ Watch
                                         {% endif %}
                                     </a>
+                                {% else %}
+                                    <span class="no-items">Coming Soon</span>
                                 {% endif %}
                                 {% if admin_mode %}
                                     <div class="admin-links">
@@ -242,6 +245,8 @@
                                             ▶️ Watch
                                         {% endif %}
                                     </a>
+                                {% else %}
+                                    <span class="no-items">Coming Soon</span>
                                 {% endif %}
                                 {% if admin_mode %}
                                     <div class="admin-links">

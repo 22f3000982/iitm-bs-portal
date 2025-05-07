@@ -27,6 +27,9 @@ INSERT INTO "assignments" VALUES(20,9,'DBMS Week-10 One Shot Revision Part-2','h
 INSERT INTO "assignments" VALUES(21,9,'DBMS Week-11 One Shot Revision ','https://youtu.be/oU8bDX5E0UQ',0);
 INSERT INTO "assignments" VALUES(22,9,'DBMS Week-12 One Shot Revision Part-1','https://youtu.be/QHiqNebNP7s',0);
 INSERT INTO "assignments" VALUES(23,9,'DBMS Week-12 One Shot Revision Part-2','https://youtu.be/Cy9LuqeBE1Y',0);
+INSERT INTO "assignments" VALUES(25,1,'BA End Term RAPID REVISION','https://youtu.be/6Gdz9z_APAM',0);
+INSERT INTO "assignments" VALUES(26,1,'BA End Term PYQ | May 24','https://youtu.be/B5FzpJKSMS0',0);
+INSERT INTO "assignments" VALUES(27,1,'BA End Term PYQ | September 24','https://youtu.be/1ecukKO2r5g',0);
 CREATE TABLE courses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL
@@ -36,6 +39,9 @@ INSERT INTO "courses" VALUES(3,'MLF');
 INSERT INTO "courses" VALUES(4,'MLT');
 INSERT INTO "courses" VALUES(5,'PDSA(Theory+OPPE)');
 INSERT INTO "courses" VALUES(9,'DBMS (Theory+OPPE)');
+INSERT INTO "courses" VALUES(13,'PYTHON (OPPE)');
+INSERT INTO "courses" VALUES(14,'MLP (Developer Harsh)');
+INSERT INTO "courses" VALUES(15,'system command(code synth)');
 CREATE TABLE notes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             course_id INTEGER NOT NULL,
@@ -64,6 +70,16 @@ INSERT INTO "notes" VALUES(20,9,'DBMS Week-5 One Shot Revision','https://youtu.b
 INSERT INTO "notes" VALUES(21,9,'DBMS Week-6 One Shot Revision','https://youtu.be/AG8w_J9vaTQ',0);
 INSERT INTO "notes" VALUES(22,9,'DBMS Week-8 One Shot Revision Part-1','https://youtu.be/AG8w_J9vaTQ',0);
 INSERT INTO "notes" VALUES(23,9,'DBMS Week-8 One Shot Revision Part-2','https://youtu.be/-MiPacTEjTE',0);
+INSERT INTO "notes" VALUES(25,1,'BA Week-5 Theory + PA','https://youtu.be/mjUw3nbnpRw',0);
+INSERT INTO "notes" VALUES(26,1,'BA Week-5 Question ','https://youtu.be/vNfRMq54SfQ',0);
+INSERT INTO "notes" VALUES(27,1,'BA Week-6 Theory + PA','https://youtu.be/jrO48GOnPrU',0);
+INSERT INTO "notes" VALUES(28,1,'BA Week-7 Theory + PA','https://youtu.be/8NpqqJzJBXg',0);
+INSERT INTO "notes" VALUES(29,1,'BA Week-8,9 Theory + Question ','https://youtu.be/AHzUPdMlM9I',0);
+INSERT INTO "notes" VALUES(30,1,'BA Week-5 MOCK','',0);
+INSERT INTO "notes" VALUES(31,1,'BA Week-6 MOCK','',0);
+INSERT INTO "notes" VALUES(32,1,'BA Week-7 MOCK','',0);
+INSERT INTO "notes" VALUES(33,1,'BA Quiz-2 PYQ | May 24','https://youtu.be/YsWyz6k13O8',1);
+INSERT INTO "notes" VALUES(34,1,'BA Quiz-2 PYQ | September 24','https://youtu.be/QxvSQWRg2bY',0);
 CREATE TABLE pyqs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             course_id INTEGER NOT NULL,
@@ -99,9 +115,24 @@ INSERT INTO "pyqs" VALUES(29,5,'PDSA Quiz-1 PYQ | Jan 24','https://youtu.be/FNfm
 INSERT INTO "pyqs" VALUES(30,5,'PDSA Quiz-1 PYQ | May 24','https://youtu.be/MGchbfQqXt4',0);
 INSERT INTO "pyqs" VALUES(32,9,'DBMS OPPE PYQ PlayList','https://www.youtube.com/playlist?list=PLTewhG5vbW7EKmyl32LAzSJLcEtuK1fer',1);
 INSERT INTO "pyqs" VALUES(33,9,'DBMS OPPE PYQ PlayList ( Developer Harsh)','https://youtube.com/playlist?list=PLDfna1ApN44qNuRotBr2ahcs9Khvesw3O&si=KPmpMeTun4dN1-1L',0);
+INSERT INTO "pyqs" VALUES(34,1,'BA Week-3 Theory','https://youtu.be/FJRSeQ80B1M',0);
+INSERT INTO "pyqs" VALUES(35,1,'BA Week-3 PA + Question','https://youtu.be/kGuzZ6M3sc4',0);
+INSERT INTO "pyqs" VALUES(36,1,'BA Week-4 Theory','https://youtu.be/7cqiKctIAQ0',0);
+INSERT INTO "pyqs" VALUES(37,1,'BA Week-1 MOCK','',1);
+INSERT INTO "pyqs" VALUES(38,1,'BA Week-2 MOCK','',0);
+INSERT INTO "pyqs" VALUES(39,1,'BA Week-3 MOCK','',0);
+INSERT INTO "pyqs" VALUES(40,1,'BA Quiz-1 PYQ | May 24','https://youtu.be/j6olYcxJDHk',0);
+INSERT INTO "pyqs" VALUES(41,1,'BA Quiz-1 PYQ | September 24','https://youtu.be/fLfVT2CaMDU',0);
+INSERT INTO "pyqs" VALUES(42,13,'PYTHON OPPE PYQ Playlist','https://www.youtube.com/playlist?list=PLTewhG5vbW7E1vbVy22w5gSkQirEEYgLC',0);
+INSERT INTO "pyqs" VALUES(43,14,'Pandas Fundamentals','https://youtu.be/0lMo3IwyTDE?si=u0f2e1xT7KagUxAo',0);
+INSERT INTO "pyqs" VALUES(44,14,'Pandas Data Exploration','https://youtu.be/GxeMevMQAbY?si=uLACmG5-WBkaIMRG',0);
+INSERT INTO "pyqs" VALUES(45,14,'Basic Data Selection using pandas','https://youtu.be/RV0JuTDeO88?si=DtMvArjP_ngCgDl0',0);
+INSERT INTO "pyqs" VALUES(46,14,'Intermediate Data Selection Techniques in Pandas','https://youtu.be/IdFgZiord-o?si=RdbHZjxWdhoC8kI_',0);
+INSERT INTO "pyqs" VALUES(47,14,'Data Manipulation using Pandas (Part 1) ','https://youtu.be/53MbqRKSfAQ?si=yYw4PQ-8aAv-PD7E',0);
+INSERT INTO "pyqs" VALUES(48,14,'Data Manipulation using Pandas (Part 2)','https://youtu.be/LqPM_zR-iR4?si=n82P_Ccf5-yh-Q9m',0);
 DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('courses',12);
-INSERT INTO "sqlite_sequence" VALUES('pyqs',33);
-INSERT INTO "sqlite_sequence" VALUES('notes',24);
-INSERT INTO "sqlite_sequence" VALUES('assignments',24);
+INSERT INTO "sqlite_sequence" VALUES('courses',15);
+INSERT INTO "sqlite_sequence" VALUES('pyqs',48);
+INSERT INTO "sqlite_sequence" VALUES('notes',34);
+INSERT INTO "sqlite_sequence" VALUES('assignments',27);
 COMMIT;

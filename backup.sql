@@ -101,9 +101,10 @@ INSERT INTO "pyqs" VALUES(28,5,'PDSA Week-4 PYQ','https://youtu.be/V2RZ8PY37Ts',
 INSERT INTO "pyqs" VALUES(29,5,'PDSA Quiz-1 PYQ | Jan 24','https://youtu.be/FNfmEJqK8bU',0);
 INSERT INTO "pyqs" VALUES(30,5,'PDSA Quiz-1 PYQ | May 24','https://youtu.be/MGchbfQqXt4',0);
 INSERT INTO "pyqs" VALUES(32,9,'DBMS OPPE PYQ PlayList','https://www.youtube.com/playlist?list=PLTewhG5vbW7EKmyl32LAzSJLcEtuK1fer',0);
+INSERT INTO "pyqs" VALUES(33,9,'DBMS OPPE PYQ PlayList ( Developer Harsh)','https://youtube.com/playlist?list=PLDfna1ApN44qNuRotBr2ahcs9Khvesw3O&si=KPmpMeTun4dN1-1L',0);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('courses',12);
-INSERT INTO "sqlite_sequence" VALUES('pyqs',32);
+INSERT INTO "sqlite_sequence" VALUES('pyqs',33);
 INSERT INTO "sqlite_sequence" VALUES('notes',24);
 INSERT INTO "sqlite_sequence" VALUES('assignments',24);
 COMMIT;

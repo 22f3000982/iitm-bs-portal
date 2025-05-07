@@ -101,12 +101,24 @@ def course_view():
     admin_mode = session.get('admin_mode', False)
     return render_template('course_view.html', courses=courses, admin_mode=admin_mode)
 
+# # Admin login (password 4129)
+# @app.route('/admin_login', methods=['POST'])
+# def admin_login():
+#     password = request.form['password']
+#     if password == '4129':
+#         session['admin_mode'] = True
+#     return redirect(url_for('course_view'))
+
+from flask import flash  # Make sure this is imported
+
 # Admin login (password 4129)
 @app.route('/admin_login', methods=['POST'])
 def admin_login():
     password = request.form['password']
     if password == '4129':
         session['admin_mode'] = True
+    else:
+        flash('काहे को छेड़ता है पराई वेबसाइट को? 😜😉')
     return redirect(url_for('course_view'))
 
 # Admin logout

@@ -4,34 +4,64 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-   
-    
 </head>
 <style>
     body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #15113a, #302b63, #24243e);
-    color: rgb(255, 255, 255);
-}
-.container {
-    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(243, 239, 239, 0.2);
-    margin: 20px auto;
-    border: none;
-
-}
-.course-card {
-    background-image: linear-gradient( 109.6deg,  rgb(62, 162, 244) 7.3%, rgba(4,137,137,1) 86.7% );
-    
-    /* background-image: linear-gradient( 109.6deg,  rgba(143,57,213,1) 11.2%, rgba(96,227,109,1) 91.1% ); */
-}
-
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(to bottom, #15113a, #302b63, #24243e);
+        color    color: rgb(255, 255, 255);
+    }
+    .container {
+        background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(243, 239, 239, 0.2);
+        margin: 20px auto;
+        border: none;
+    }
+    .course-card {
+        background-image: linear-gradient(109.6deg, rgb(62, 162, 244) 7.3%, rgba(4,137,137,1) 86.7%);
+    }
+    /* Toast Notification Styles */
+    .toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: #ff4d4d;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1000;
+        right: 30px;
+        top: 30px;
+        font-size: 16px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .toast.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    @-webkit-keyframes fadein {
+        from {top: 0; opacity: 0;}
+        to {top: 30px; opacity: 1;}
+    }
+    @keyframes fadein {
+        from {top: 0; opacity: 0;}
+        to {top: 30px; opacity: 1;}
+    }
+    @-webkit-keyframes fadeout {
+        from {top: 30px; opacity: 1;}
+        to {top: 0; opacity: 0;}
+    }
+    @keyframes fadeout {
+        from {top: 30px; opacity: 1;}
+        to {top: 0; opacity: 0;}
+    }
 </style>
 <body>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <h2>Dashboard</h2>
@@ -39,8 +69,7 @@
         <a href="#">📞 Contact Us</a>
         <a href="#">ℹ️ About Admin</a>
         <a href="#">⚙️ Settings</a>
-
-        {% if not admin_mode %}
+        {% if not session['admin_mode'] %}
             <!-- Admin Login Form in Sidebar -->
             <form class="admin-login-form" action="{{ url_for('admin_login') }}" method="post">
                 <input class="password-input" type="password" name="password" placeholder="Admin Password" required>
@@ -51,10 +80,8 @@
             <a href="{{ url_for('admin_logout') }}">🚪 Exit Admin</a>
         {% endif %}
     </div>
-
     <!-- Top Navbar -->
     <div class="navbar">
-        <!-- <input type="text" class="search-box" placeholder="Search Courses..."> -->
         <input type="text" id="globalSearch" class="global-search" placeholder="Search Course...">
         <div class="navbar-buttons">
             <button class="nav-btn">🔔 Notifications</button>
@@ -62,23 +89,17 @@
             <button class="nav-btn">👤 Profile</button>
         </div>
     </div>
-
     <!-- Main Content -->
     <div class="main-content">
         <div class="container">
             <h1 class="page-title" style="color: white;">Available Courses</h1>
-            <!-- <p class="page-description">Explore our range of courses.</p> -->
-            <p class="page-description" style="color: white;" >Click on a course name to view details.</p>
-
-
-            <!-- <input type="text" id="globalSearch" class="global-search" placeholder="Global Search..."> -->
-
+            <p class="page-description" style="color: white;">Click on a course name to view details.</p>
             {% if courses %}
             <div class="course-grid" id="courseList">
                 {% for course in courses %}
                     <div class="course-card">
                         <a class="course-link" style="color: rgb(249, 245, 245);" href="{{ url_for('course_detail', course_id=course[0]) }}">{{ course[1] }}</a>
-                        {% if admin_mode %}
+                        {% if session['admin_mode'] %}
                             <div class="admin-actions">
                                 <a class="edit-link" href="{{ url_for('admin_edit_course', course_id=course[0]) }}">Edit</a>
                                 |
@@ -88,19 +109,18 @@
                     </div>
                 {% endfor %}
             </div>
-            
             {% else %}
                 <p class="no-courses">No courses available.</p>
             {% endif %}
         </div>
     </div>
-
+    <!-- Toast Notification Container -->
+    <div id="toast" class="toast"></div>
     <script>
         // Global Search Function
         const searchInput = document.getElementById('globalSearch');
         const courseList = document.getElementById('courseList');
         const courses = courseList.getElementsByClassName('course-card');
-    
         searchInput.addEventListener('input', function() {
             const query = this.value.toLowerCase();
             for (let course of courses) {
@@ -108,8 +128,21 @@
                 course.style.display = title.includes(query) ? 'flex' : 'none';
             }
         });
+        // Toast Notification Function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast show';
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+        // Display Flash Messages as Toast
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            showToast("{{ messages[0] }}");
+        {% endif %}
+        {% endwith %}
     </script>
-    
-
 </body>
 </html>

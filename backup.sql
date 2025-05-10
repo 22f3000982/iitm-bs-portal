@@ -30,6 +30,8 @@ INSERT INTO "assignments" VALUES(23,9,'DBMS Week-12 One Shot Revision Part-2','h
 INSERT INTO "assignments" VALUES(25,1,'BA End Term RAPID REVISION','https://youtu.be/6Gdz9z_APAM',0);
 INSERT INTO "assignments" VALUES(26,1,'BA End Term PYQ | May 24','https://youtu.be/B5FzpJKSMS0',0);
 INSERT INTO "assignments" VALUES(27,1,'BA End Term PYQ | September 24','https://youtu.be/1ecukKO2r5g',0);
+INSERT INTO "assignments" VALUES(28,15,'SC End Term PYQ | May 24','https://youtu.be/3xGSs4vmp4A?si=P1l0mfmdrxTkLmcV',0);
+INSERT INTO "assignments" VALUES(29,15,'SC End Term PYQ | September 24','https://youtu.be/0MQ1fjaEqBo?si=G1fFGgFRaDHC1tRF',0);
 CREATE TABLE courses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL
@@ -80,6 +82,8 @@ INSERT INTO "notes" VALUES(31,1,'BA Week-6 MOCK','',0);
 INSERT INTO "notes" VALUES(32,1,'BA Week-7 MOCK','',0);
 INSERT INTO "notes" VALUES(33,1,'BA Quiz-2 PYQ | May 24','https://youtu.be/YsWyz6k13O8',1);
 INSERT INTO "notes" VALUES(34,1,'BA Quiz-2 PYQ | September 24','https://youtu.be/QxvSQWRg2bY',0);
+INSERT INTO "notes" VALUES(35,15,'SC Week-5 Theory + Practical','https://youtu.be/s3pR7yoxwDs?si=KfbbQLgUz2sJAnzH',0);
+INSERT INTO "notes" VALUES(36,15,'SC Week-6 Theory + Practical','https://youtu.be/hPqXZhKgeqw?si=_cPS_UE3qTQZQgVs',0);
 CREATE TABLE pyqs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             course_id INTEGER NOT NULL,
@@ -130,9 +134,16 @@ INSERT INTO "pyqs" VALUES(45,14,'Basic Data Selection using pandas','https://you
 INSERT INTO "pyqs" VALUES(46,14,'Intermediate Data Selection Techniques in Pandas','https://youtu.be/IdFgZiord-o?si=RdbHZjxWdhoC8kI_',0);
 INSERT INTO "pyqs" VALUES(47,14,'Data Manipulation using Pandas (Part 1) ','https://youtu.be/53MbqRKSfAQ?si=yYw4PQ-8aAv-PD7E',0);
 INSERT INTO "pyqs" VALUES(48,14,'Data Manipulation using Pandas (Part 2)','https://youtu.be/LqPM_zR-iR4?si=n82P_Ccf5-yh-Q9m',0);
+INSERT INTO "pyqs" VALUES(49,15,'SC Week-1 Theory','https://youtu.be/kt7NWWknt7g?si=WKKZcMYrUD4QdsLm',0);
+INSERT INTO "pyqs" VALUES(50,15,'SC Week-1 Practical','https://youtu.be/BN58MIsNoNI?si=qqc01rqsC9p35rZj',0);
+INSERT INTO "pyqs" VALUES(51,15,'SC Week-2 Theory + Practical','https://youtu.be/R4fg5N4A4v8?si=ot9lSj8vp-DChMv4',0);
+INSERT INTO "pyqs" VALUES(52,15,'SC Week-3 Theory + Practical','https://youtu.be/I5iNrwYY3-g?si=dFPpGF2P2nSdxtbt',0);
+INSERT INTO "pyqs" VALUES(53,15,'SC Week-4 Theory + Practical','https://youtu.be/exn3eq440Zs?si=1f-FNTDpK9SF9OwD',0);
+INSERT INTO "pyqs" VALUES(54,15,'SC Quiz-1 PYQ | May 24','https://youtu.be/oEwtzNOJcSg?si=nf2WPMQKsws7qDrU',0);
+INSERT INTO "pyqs" VALUES(55,15,'SC Quiz-1 PYQ | September 24','https://youtu.be/iliZN4uthCg?si=q6ArDByGdk-yRWzf',0);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('courses',15);
-INSERT INTO "sqlite_sequence" VALUES('pyqs',48);
-INSERT INTO "sqlite_sequence" VALUES('notes',34);
-INSERT INTO "sqlite_sequence" VALUES('assignments',27);
+INSERT INTO "sqlite_sequence" VALUES('pyqs',55);
+INSERT INTO "sqlite_sequence" VALUES('notes',36);
+INSERT INTO "sqlite_sequence" VALUES('assignments',29);
 COMMIT;

@@ -10,7 +10,7 @@
         margin: 0;
         font-family: 'Segoe UI', sans-serif;
         background: linear-gradient(to bottom, #15113a, #302b63, #24243e);
-        color    color: rgb(255, 255, 255);
+        color: rgb(255, 255, 255);
     }
     .container {
         background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
@@ -97,7 +97,7 @@
             {% if courses %}
             <div class="course-grid" id="courseList">
                 {% for course in courses %}
-                    <div class="course-card">
+                    <div class="course-card" data-href="{{ url_for('course_detail', course_id=course[0]) }}">
                         <a class="course-link" style="color: rgb(249, 245, 245);" href="{{ url_for('course_detail', course_id=course[0]) }}">{{ course[1] }}</a>
                         {% if session['admin_mode'] %}
                             <div class="admin-actions">
@@ -128,6 +128,15 @@
                 course.style.display = title.includes(query) ? 'flex' : 'none';
             }
         });
+        // Make entire course card clickable
+        for (let course of courses) {
+            course.addEventListener('click', function(event) {
+                // Prevent clicking on admin actions from triggering card navigation
+                if (!event.target.classList.contains('edit-link') && !event.target.classList.contains('delete-link')) {
+                    window.location.href = this.getAttribute('data-href');
+                }
+            });
+        }
         // Toast Notification Function
         function showToast(message) {
             const toast = document.getElementById('toast');

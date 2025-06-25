@@ -122,8 +122,6 @@ INSERT INTO "pyqs" VALUES(33,9,'DBMS OPPE PYQ PlayList ( Developer Harsh)','http
 INSERT INTO "pyqs" VALUES(34,1,'BA Week-3 Theory','https://youtu.be/FJRSeQ80B1M',0);
 INSERT INTO "pyqs" VALUES(35,1,'BA Week-3 PA + Question','https://youtu.be/kGuzZ6M3sc4',0);
 INSERT INTO "pyqs" VALUES(36,1,'BA Week-4 Theory','https://youtu.be/7cqiKctIAQ0',0);
-INSERT INTO "pyqs" VALUES(37,1,'BA Week-1 MOCK','',1);
-INSERT INTO "pyqs" VALUES(38,1,'BA Week-2 MOCK','',0);
 INSERT INTO "pyqs" VALUES(39,1,'BA Week-3 MOCK','',0);
 INSERT INTO "pyqs" VALUES(40,1,'BA Quiz-1 PYQ | May 24','https://youtu.be/j6olYcxJDHk',0);
 INSERT INTO "pyqs" VALUES(41,1,'BA Quiz-1 PYQ | September 24','https://youtu.be/fLfVT2CaMDU',0);
@@ -141,9 +139,10 @@ INSERT INTO "pyqs" VALUES(52,15,'SC Week-3 Theory + Practical','https://youtu.be
 INSERT INTO "pyqs" VALUES(53,15,'SC Week-4 Theory + Practical','https://youtu.be/exn3eq440Zs?si=1f-FNTDpK9SF9OwD',0);
 INSERT INTO "pyqs" VALUES(54,15,'SC Quiz-1 PYQ | May 24','https://youtu.be/oEwtzNOJcSg?si=nf2WPMQKsws7qDrU',0);
 INSERT INTO "pyqs" VALUES(55,15,'SC Quiz-1 PYQ | September 24','https://youtu.be/iliZN4uthCg?si=q6ArDByGdk-yRWzf',0);
+INSERT INTO "pyqs" VALUES(56,1,'BA Quiz-1 PYQ | January 25','https://youtu.be/NL-30EDLJj0',0);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('courses',15);
-INSERT INTO "sqlite_sequence" VALUES('pyqs',55);
+INSERT INTO "sqlite_sequence" VALUES('pyqs',56);
 INSERT INTO "sqlite_sequence" VALUES('notes',36);
 INSERT INTO "sqlite_sequence" VALUES('assignments',29);
 COMMIT;

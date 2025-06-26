@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PYQ Platform</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
             margin: 0;
@@ -18,7 +20,6 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            /* background: #000029 url("https://www.freepik.com/premium-vector/sparkling-gold-stars_137539626.htm#fromView=keyword&page=1&position=8&uuid=9efd431d-a9f8-43b0-8cd4-3524ff0fb2c3&query=Twinkling+Stars") no-repeat center center; */
             background-size: cover;
             z-index: 1;
         }
@@ -98,6 +99,182 @@
             color: #d3d3d3;
         }
 
+        /* Social Media Icons and Meta Links */
+        .wrapper {
+            display: inline-flex;
+            list-style: none;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .wrapper .icon {
+            position: relative;
+            background: #ffffff;
+            border-radius: 50%;
+            padding: 15px;
+            margin: 10px;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .icon a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: #333333; /* Default color for icons */
+        }
+
+        .wrapper .icon span {
+            color: #333333; /* Default color for tooltip text */
+        }
+
+        .wrapper .tooltip {
+            position: absolute;
+            top: -50px;
+            font-size: 14px;
+            background: #ffffff;
+            color: #333333; /* Default color for tooltip text */
+            padding: 6px 10px;
+            border-radius: 6px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .tooltip::before {
+            position: absolute;
+            content: "";
+            height: 8px;
+            width: 8px;
+            background: #ffffff;
+            bottom: -3px;
+            left: 50%;
+            transform: translate(-50%) rotate(45deg);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wrapper .icon:hover .tooltip {
+            top: -45px;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .wrapper .icon:hover a {
+            color: #ffffff; /* White color on hover */
+        }
+
+        .wrapper .icon:hover span,
+        .wrapper .icon:hover .tooltip {
+            text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+            color: #ffffff; /* White color on hover for text and tooltip */
+        }
+
+        .wrapper .linkedin:hover,
+        .wrapper .linkedin:hover .tooltip,
+        .wrapper .linkedin:hover .tooltip::before {
+            background: #0A66C2;
+            color: #ffffff;
+        }
+
+        .wrapper .instagram:hover,
+        .wrapper .instagram:hover .tooltip,
+        .wrapper .instagram:hover .tooltip::before {
+            background: #E4405F;
+            color: #ffffff;
+        }
+
+        .wrapper .github:hover,
+        .wrapper .github:hover .tooltip,
+        .wrapper .github:hover .tooltip::before {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .wrapper .youtube:hover,
+        .wrapper .youtube:hover .tooltip,
+        .wrapper .youtube:hover .tooltip::before {
+            background: #CD201F;
+            color: #ffffff;
+        }
+
+        .wrapper .website:hover,
+        .wrapper .website:hover .tooltip,
+        .wrapper .website:hover .tooltip::before {
+            background: #4CAF50;
+            color: #ffffff;
+        }
+
+        .wrapper .icon .logo {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            margin-left: 5px;
+        }
+
+        .meta-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .meta-link {
+            align-items: center;
+            backdrop-filter: blur(3px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: inline-flex;
+            gap: 8px;
+            padding: 12px 24px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .meta-link:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .meta-link > i,
+        .meta-link > span {
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .meta-link > span {
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        #telegram-link > i {
+            color: #0088cc;
+        }
+
+        #yt-link > i {
+            color: rgb(219, 31, 106);
+        }
+
         @media only screen and (max-width: 768px) {
             .Header h1 {
                 font-size: 2.5em;
@@ -122,37 +299,57 @@
         <canvas id="demo-canvas"></canvas>
         <div class="Header">
             <h1>Welcome</h1>
-            <p>Abhi soch rha hu ky ky Likhu yha , tab tk aap start kro, Andar sb yt waale video well organised hain</p> 
-            <!-- <p>Explore previous year questions organized by course and stay prepared!</p> -->
-            <!-- <p>Our platform is designed to help you find and study previous year questions efficiently.</p> -->
-            <!-- <a href="#" class="Button">Let's Get Started</a> -->
+            <p>Abhi soch rha hu ky ky Likhu yha , tab tk aap start kro, Andar sb yt waale video well organised hain</p>
             <a href="{{ url_for('course_view') }}" class="Button">Let's Get Started</a>
-            <!-- <a href="{{ url_for('admin_add_course') }}" class="Button">Let's Get Started</a> -->
-
             <div class="Container">
                 <h2>Why Choose Us?</h2>
-                <!-- <p>Our platform provides a comprehensive collection of previous year questions, making it easier for you to prepare for your exams.</p> -->
-                <!-- <p>For any queries, feel free to reach out to us.</p> -->
-                <!-- <p>Happy studying!</p> -->
                 <p>Because my contents are like wine — they get better with time. 🍷</p>
                 <p>Got a question? Ask away — our answers are like wine too — sometimes bitter, sometimes sweet. 😉</p>
-
-
             </div>
-
-
-
+            <ul class="wrapper">
+                <li class="icon website">
+                    <a href="https://mauryahub.onrender.com/" target="_blank">
+                        <span class="tooltip">Website</span>
+                        <span><i class="fas fa-globe"></i></span>
+                    </a>
+                </li>
+                <li class="icon linkedin">
+                    <a href="https://www.linkedin.com/in/ashish-raj-02a700259/" target="_blank">
+                        <span class="tooltip">LinkedIn</span>
+                        <span><i class="fab fa-linkedin-in"></i></span>
+                    </a>
+                </li>
+                <li class="icon instagram">
+                    <a href="https://www.instagram.com/ashraj77777" target="_blank">
+                        <span class="tooltip">Instagram</span>
+                        <span><i class="fab fa-instagram"></i></span>
+                    </a>
+                </li>
+                <li class="icon github">
+                    <a href="https://github.com/22f3000982" target="_blank">
+                        <span class="tooltip">Github</span>
+                        <span><i class="fab fa-github"></i></span>
+                    </a>
+                </li>
+                <li class="icon youtube">
+                    <a href="https://www.youtube.com/@ashishmaurya7157" target="_blank">
+                        <span class="tooltip">Youtube</span>
+                        <span><i class="fab fa-youtube"></i></span>
+                    </a>
+                </li>
+            </ul>
+            <div class="meta-links">
+                <!-- <a href="https://t.me/your-telegram-channel" class="meta-link" id="telegram-link">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>Join my Telegram</span>
+                </a> -->
+                <a href="https://www.youtube.com/@ashishmaurya7157" class="meta-link" id="yt-link">
+                    <i class="fab fa-youtube"></i>
+                    <span>Subscribe my channel..❤</span>
+                </a>
+            </div>
         </div>
     </div>
-
-    <!-- <div class="Container">
-        <h2>Why Choose Us?</h2>
-        <p>Our platform provides a comprehensive collection of previous year questions, making it easier for you to prepare for your exams.</p>
-        <p>For any queries, feel free to reach out to us.</p>
-        <p>Happy studying!</p>
-    </div> -->
-
-    <!-- Include GSAP library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script>
         (function () {

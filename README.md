@@ -1,4 +1,4 @@
-# IITM BS Portal
+# MauryaHub (Ashish Maurya)
 
 ## Overview
 

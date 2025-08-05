@@ -5,6 +5,32 @@
     <title>{{ course_name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style8.css') }}">
     <style>
+        .extra-stuff-btn {
+            display: inline-flex;
+            align-items: center;
+            background-image: linear-gradient(75.1deg, rgba(34,126,34,1) 6%, rgba(99,226,17,1) 84.3%);
+            color: #fff !important;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 999px;
+            padding: 7px 22px 7px 14px;
+            margin-left: 10px;
+            font-size: 1rem;
+            border: none;
+            box-shadow: 0 2px 8px rgba(34,126,34,0.10);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, filter 0.2s;
+        }
+        .extra-stuff-btn:hover {
+            filter: brightness(1.08) saturate(1.2);
+            color: #eaffea !important;
+            text-decoration: underline;
+            box-shadow: 0 4px 16px rgba(99,226,17,0.18);
+        }
+        .extra-stuff-icon {
+            margin-right: 7px;
+            font-size: 1.1em;
+        }
         body, html {
             margin: 0;
             padding: 0;
@@ -153,7 +179,23 @@
 
 <div class="main-content">
     <div class="container">
-        <h1>{{ course_name }}</h1>
+        <h1 id="courseTitle">{{ course_name }} <span id="extraStuff" style="font-size:1rem;">
+            {% if extra_stuff %}
+                <a href="{{ extra_stuff[1] }}" target="_blank" class="extra-stuff-btn">
+                    <span class="extra-stuff-icon">🔗</span>{{ extra_stuff[0] }}
+                </a>
+            {% endif %}
+        </span></h1>
+        {% if admin_mode %}
+        <div style="margin-bottom:18px;">
+            <button class="btn" type="button" onclick="showExtraForm()" style="background:#a5b4fc;color:#232946;">Add Extra Stuff</button>
+            <form id="extraForm" style="display:none; margin-top:10px;" onsubmit="addExtraStuff(event)">
+                <input type="text" name="extraName" placeholder="Name" style="padding:6px;border-radius:6px;border:1px solid #ccc;margin-right:6px;">
+                <input type="text" name="extraLink" placeholder="Link" style="padding:6px;border-radius:6px;border:1px solid #ccc;margin-right:6px;">
+                <button type="submit" class="btn" style="background:#06b6d4;color:#fff;">Add</button>
+            </form>
+        </div>
+        {% endif %}
         <input type="text" id="searchInput" placeholder="Search items...">
 
         <div class="cards">
@@ -273,7 +315,49 @@
             item.style.display = text.includes(searchTerm) ? 'flex' : 'none';
         });
     });
-</script>
-
-</body>
-</html>
+    // Extra Stuff Logic
+    function showExtraForm() {
+        document.getElementById('extraForm').style.display = 'block';
+    }
+    function addExtraStuff(event) {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.extraName.value.trim();
+        const link = form.extraLink.value.trim();
+        if (name && link) {
+            // AJAX POST to backend
+            fetch(`/course/{{ course_id }}/add_extra`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `name=${encodeURIComponent(name)}&link=${encodeURIComponent(link)}`
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    const stuffSpan = document.getElementById('extraStuff');
+                    stuffSpan.innerHTML = `<a href="${link}" target="_blank" class="extra-stuff-btn"><span class='extra-stuff-icon'>🔗</span>${name}</a>`;
+                    form.style.display = 'none';
+                } else {
+                    alert('Failed to add extra stuff: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(() => alert('Failed to add extra stuff.'));
+        } else {
+            alert('Please enter both name and link for extra stuff.');
+        }
+    }
+ .extra-stuff-link {
+display: inline-flex;
+align-items: center;
+background: linear-gradient(90deg, #f6c7b6 60%, #a5b4fc 100%);
+color: #232946 !important;
+font-weight: 600;
+text-decoration: none;
+border-radius: 999px;
+padding: 4px 16px 4px 10px;
+margin-left: 10px;
+font-size: 1rem;
+box-shadow: 0 2px 8px rgba(246, 199, 182, 0.12);
+transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+}
